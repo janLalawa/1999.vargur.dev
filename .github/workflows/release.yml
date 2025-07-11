@@ -1,0 +1,44 @@
+name: Build and Release Eleventy Site
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build Eleventy site
+      - name: Build site
+        run: npm run build
+
+      # 5. Archive built site
+      - name: Archive built site
+        run: tar -czf site.tar.gz _site
+
+      # 6. Create GitHub Release and upload artifact
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}-${{ github.run_number }}
+          name: "Release ${{ github.ref_name }} Build ${{ github.run_number }}"
+          files: site.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
