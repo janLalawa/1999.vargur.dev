@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or "MY AWESOME CONTENT - INTERNET EXTREME 1999" }}</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .content-page {
+            padding: 1rem;
+            color: #efd18b;
+            min-height: 100vh;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+            border: 3px ridge #a100ff;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 2rem;
+            box-shadow:
+                    0 0 20px rgba(0, 255, 0, 0.3),
+                    inset 0 0 20px rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .content-title {
+            font-size: 24px;
+            color: #ee0707;
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: underline;
+            text-shadow: 0 0 10px #a1fcff;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        .content-meta {
+            font-size: 12px;
+            color: #ffff00;
+            margin-bottom: 2rem;
+            font-style: italic;
+            text-align: center;
+            text-shadow: 0 0 5px #ffff00;
+        }
+
+        .content-body {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #d0d0ff;
+        }
+
+        .content-body h1 {
+            color: #efd18b;
+            text-shadow: 0 0 5px #efd18b;
+        }
+
+        .content-body h2 {
+            color: #efd18b;
+            font-size: 18px;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-body h3 {
+            color: #efd18b;
+            font-size: 16px;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .content-body p {
+            margin-bottom: 1rem;
+        }
+
+        .content-body ul, .content-body ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-body a {
+            color: #1df3bb;
+            text-decoration: underline;
+        }
+
+        .content-body a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 5px #ff00ff;
+        }
+
+        .content-image {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .content-image img {
+            max-width: 100%;
+            border: 2px solid #666;
+        }
+
+        .content-image-caption {
+            font-size: 12px;
+            color: #ffff00;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .content-divider {
+            border: 1px inset #38143f;
+            margin: 2rem 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #a100ff;
+        }
+
+        .nav-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background: linear-gradient(135deg, #663399, #4a1a4a, #663399);
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Courier New', serif;
+            font-size: 12px;
+            border: 2px outset #9966cc;
+            text-shadow: 1px 1px 2px #000000;
+            box-shadow:
+                    0 0 5px rgba(153, 102, 204, 0.5),
+                    inset 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(135deg, #9966cc, #cc99ff, #ffffcc);
+            color: #000000;
+            border: 2px outset #ffffcc;
+            text-shadow: 1px 1px 2px #663399;
+            box-shadow:
+                    0 0 15px rgba(255, 255, 204, 0.8),
+                    0 0 25px rgba(204, 153, 255, 0.6),
+                    inset 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .guestbook-button {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .blinking-new {
+            display: inline-block;
+            color: #ff0000;
+            font-weight: bold;
+            animation: blink 1s infinite;
+            margin-left: 5px;
+        }
+
+        .hit-counter {
+            text-align: center;
+            font-size: 12px;
+            color: #808080;
+            margin-top: 2rem;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #808080;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px dotted #666;
+        }
+    </style>
+</head>
+<body class="content-page retro-bg">
+<div class="content-container">
+    <h1 class="content-title">★ {{ title }} ★</h1>
+    {% if date %}
+        <p class="content-meta">Posted on: {{ date }} | Last updated: {{ lastUpdated or date }}</p>
+    {% endif %}
+
+    <div class="content-body">
+        {{ content | safe }}
+    </div>
+
+    <div class="nav-buttons">
+        <a href="/home" class="nav-button">🏠 Back to Homepage</a>
+    </div>
+
+    <div class="hit-counter">
+        <p>This page has been visited <strong>{{ visitCount or "42" }}</strong> times since 1999</p>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 1999.vargur.dev | Webmaster: <a href="https://bsky.app/profile/vargur.dev">bsky: vargur.dev</a></p>
+        <p><strong style="color: #ff00ff;">Made with ♥ and lots of caffeine!</strong></p>
+        <p style="font-size: 9px; margin-top: 10px;">
+            This site is best viewed with Netscape Navigator 4.0+ or Internet Explorer 5.0+<br>
+            at 800x600 resolution with thousands of colors enabled
+        </p>
+    </div>
+</div>
+</body>
+</html>
